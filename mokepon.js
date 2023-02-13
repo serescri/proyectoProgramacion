@@ -37,11 +37,11 @@ function seleccionarMascotaJugador() {
 
 function seleccionarMascotaEnemigo() {
     let spanMascotaEnemigo = document.getElementById("mascota-enemigo")
-    let ataqueAleatorio = aleatorio(1,3)
+    let mascotaAleatoria = aleatorio(1,3)
 
-    if (ataqueAleatorio == 1) {
+    if (mascotaAleatoria == 1) {
         spanMascotaEnemigo.innerHTML = "Hipodoge"
-    }else if (ataqueAleatorio == 2) {
+    }else if (mascotaAleatoria == 2) {
         spanMascotaEnemigo.innerHTML = "Capipepo"
     }else {
         spanMascotaEnemigo.innerHTML = "Ratigueya"
@@ -62,8 +62,16 @@ function ataqueTierra(){
 }
 
 function ataqueAleatorioEnemigo(){
+    let ataqueAleatorio = aleatorio(1,3)
 
-}
+    if (ataqueAleatorio == 1){
+        ataqueEnemigo = "FUEGO"
+    }else if (ataqueAleatorio == 2){
+        ataqueEnemigo = "AGUA"
+    }else {
+        ataqueEnemigo = "TIERRA"
+    }
+} 
 
 function aleatorio(min, max){ return Math.floor(Math.random() * (max - min + 1) + min)
 
