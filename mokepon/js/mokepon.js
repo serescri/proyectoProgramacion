@@ -102,8 +102,22 @@ function combate(){
        {crearMensaje("PERDISTE")
        vidasJugador --
        spanVidasJugador.innerHTML = vidasJugador
-       }   
+       } 
+       
+       revisarVidas()
 }
+
+function revisarVidas() {
+
+    if(vidasJugador == 0) [
+        crearMensajeFinal("!!! MUY MAL PERDISTE !!! ")
+    ]
+    else if(vidasEnemigo == 0) {
+        crearMensajeFinal("Felicitaciones !!! GANASTE !!! 🏆🏆")
+    }
+
+}
+
 function crearMensaje(resultado) {
    
    let sectionMensajes = document.getElementById("mensajes")
@@ -113,6 +127,16 @@ function crearMensaje(resultado) {
 
     sectionMensajes.appendChild(parrafo)
 }
+
+function crearMensajeFinal(resultadoFinal) {
+   
+    let sectionMensajes = document.getElementById("mensajes")
+     
+    let parrafo = document.createElement("p") 
+     parrafo.innerHTML = resultadoFinal
+ 
+     sectionMensajes.appendChild(parrafo)
+ }
 
 function aleatorio(min, max){ return Math.floor(Math.random() * (max - min + 1) + min)
 
