@@ -1,12 +1,55 @@
-.titulo{
-    color:lightpink;
-    width: 286px;
-    height: 50px;
-    background-color: teal;
-}
+
 #seleccionar-mascota{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: blue;
+}
+.titulo{
+    color: white;
+    font-size: 36px;
+    font-family: 'Fredoka One', cursive;
+}
+.subtitulo{
+    color: white;
+    font-size: 20px;
+}
+.tarjetas {
+    display: flex;
+    gap: 10px;
+}
+
+.tarjeta-mokepon{
+    width: 180px;
+    height: 100px;
+    background-color: blueviolet;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.tarjeta-mokepon img{
+    width: 60px;
+}
+
+#boton-mascota{
+    width: 180px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 30px;
+}
+input{
+    display: none;
 }

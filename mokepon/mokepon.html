@@ -5,25 +5,35 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MOKEPON!</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300&display=swap');
+       </style>
         <script src="js/mokepon.js"></script> 
         <link rel="stylesheet" href="./styles.css">
     </head>
-<body>
+    <body>
     <section id="seleccionar-mascota">
-        <h1 id="titulo1"class="titulo"> MOKEPON! 🔥💧🎋</h1>
-        <h2>Elige tu mascota:</h2>
+        <h1 id="titulo1"class="titulo"> Mokepon</h1>
+        <h2 class="subtitulo">Elige tu mascota:</h2>
 
-        <label for="hipodoge">Hipodoge</label>
-        <input type="radio" name="mascota" id="hipodoge"/>
+        <div class="tarjetas">
+            <label class="tarjeta-mokepon" for="hipodoge">
+                <p>Hipodoge</p>
+            <img src="./assets/mokepons_mokepon_hipodoge_attack.png" alt="Hipodoge"></label>
+            <input type="radio" name="mascota" id="hipodoge"/>
         
-        <label for="capipepo">Capipepo</label>
-        <input type="radio" name="mascota" id="capipepo"/>
+             <label class="tarjeta-mokepon" for="capipepo">
+                <p>Capipepo</p>
+            <img src="./assets/mokepons_mokepon_capipepo_attack.png" alt="Capipepo"></label>
+             <input type="radio" name="mascota" id="capipepo"/>
         
-        <label for="ratigueya">Ratigueya</label>
-        <input type="radio" name="mascota" id="ratigueya"/>
+             <label< class="tarjeta-mokepon" for="ratigueya">
+             <p>Ratigueya</p>
+             <img src="./assets/mokepons_mokepon_ratigueya_attack.png" alt="Ratigueya"></label>
+             <input type="radio" name="mascota" id="ratigueya"/>
 
-    
-
+        </div>
+        
         <button id="boton-mascota">Seleccionar</button>
     </section>
 
