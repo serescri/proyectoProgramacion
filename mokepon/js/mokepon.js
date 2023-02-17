@@ -26,8 +26,9 @@ function seleccionarMascotaJugador() {
     
     let sectionSelecionarMascota = document.getElementById("seleccionar-mascota")
     sectionSelecionarMascota.style.display = "none"
+    
     let sectionSelecionarAtaque = document.getElementById("seleccionar-ataque")
-    sectionSelecionarAtaque.style.display = "block"
+    sectionSelecionarAtaque.style.display = "flex"
     
     let inputHipodoge = document.getElementById("hipodoge")
     let inputCapipepo = document.getElementById("capipepo")
@@ -134,22 +135,32 @@ function revisarVidas() {
 
 function crearMensaje(resultado) {
    
-   let sectionMensajes = document.getElementById("mensajes")
-    
-   let parrafo = document.createElement("p") 
-    parrafo.innerHTML = "Tu mascota atacó con " +  ataqueJugador +", la mascota del enemigo atacó con " + ataqueEnemigo + " " + resultado
+   let sectionMensajes = document.getElementById("resultado")
+   let AtaquesDelJugador = document.getElementById("ataques-del-jugador")
+   let AtaquesDelEnemigo = document.getElementById("ataques-del-enemigo")
 
-    sectionMensajes.appendChild(parrafo)
+   //let notificacion = document.createElement("p")
+   let nuevoAtaqueDelJugador = document.createElement("p")
+   let nuevoAtaqueDelEnemigo = document.createElement("p")
+
+   sectionMensajes.innerHTML = resultado
+   nuevoAtaqueDelJugador.innerHTML = ataqueJugador
+   nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+
+
+   // sectionMensajes.appendChild(notificacion)
+    AtaquesDelJugador.appendChild(nuevoAtaqueDelJugador)
+    AtaquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
 }
 
 function crearMensajeFinal(resultadoFinal) {
    
-    let sectionMensajes = document.getElementById("mensajes")
+    let sectionMensajes = document.getElementById("resultado")
      
-    let parrafo = document.createElement("p") 
-     parrafo.innerHTML = resultadoFinal
+    //let parrafo = document.createElement("p") 
+     sectionMensajes.innerHTML = resultadoFinal
  
-     sectionMensajes.appendChild(parrafo)
+     //sectionMensajes.appendChild(parrafo)
 
      let botonFuego = document.getElementById("boton-fuego")
      botonFuego.disabled = true
