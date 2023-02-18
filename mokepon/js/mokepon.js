@@ -101,22 +101,22 @@ function combate(){
         else if(ataqueJugador == "FUEGO" && ataqueEnemigo == "TIERRA") {
         crearMensaje("GANASTE")
         vidasEnemigo --
-        spanVidasEnemigo.innerHTML = vidasEnemigo
+        spanVidasEnemigo.innerHTML = vidasEnemigo + " vidas"
         }
         else if(ataqueJugador == "AGUA" && ataqueEnemigo == "FUEGO") {
         crearMensaje("GANASTE")
         vidasEnemigo --
-        spanVidasEnemigo.innerHTML = vidasEnemigo
+        spanVidasEnemigo.innerHTML = vidasEnemigo + " vidas"
         }
         else if(ataqueJugador == "TIERRA" && ataqueEnemigo == "AGUA") {
         crearMensaje("GANASTE")
-        vidasEnemigo --
+        vidasEnemigo -- + " vidas"
         spanVidasEnemigo.innerHTML = vidasEnemigo
         }
         else 
        {crearMensaje("PERDISTE")
        vidasJugador --
-       spanVidasJugador.innerHTML = vidasJugador
+       spanVidasJugador.innerHTML = vidasJugador +" vidas"
        } 
        
        revisarVidas()

@@ -18,7 +18,7 @@ body{
     color: white;
     font-size: 20px;
 }
-.tarjetas {
+.tarjetas, .tarjetas-ataques {
     display: flex;
     gap: 10px;
 }
@@ -53,6 +53,10 @@ body{
 input{
     display: none;
 }
+input:checked + label{
+    background-color: crimson;
+}
+    
 
 #seleccionar-ataque{
     flex-direction: column;
@@ -92,4 +96,16 @@ input{
 #vidas-jugador, #vidas-enemigo{
     font-size: 32px;
     margin-bottom: 0;
+}
+.ataques-jugador, .ataques-enemigo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 360px) {
+    .tarjetas, .tarjetas-ataques{   
+flex-direction: column;
+    }
+    
 }
