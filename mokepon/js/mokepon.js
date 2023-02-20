@@ -17,6 +17,7 @@ const AtaquesDelEnemigo = document.getElementById("ataques-del-enemigo")
 let botonFuego 
 let botonAgua 
 let botonTierra 
+let botones = []
 let contenedorTarjetas = document.getElementById("contenedorTarjetas")
 let mokepones = []
 let inputHipodoge 
@@ -124,18 +125,19 @@ function extraerAtaques(mascotaJugador) {
 function mostrarAtaques(ataques) {
     ataques.forEach((ataque) => {
         ataquesMokepon = `
-        <button id=${ataque.id} class="boton-de-ataque">${ataque.nombre}</button>
+        <button id=${ataque.id} class="boton-de-ataque BAtaque">${ataque.nombre}</button>
         `
         contenedorAtaques.innerHTML += ataquesMokepon
         })
         botonFuego = document.getElementById("boton-fuego")
         botonAgua = document.getElementById("boton-agua")
         botonTierra = document.getElementById("boton-tierra")
+        botones = document.querySelectorAll(".BAtaque")
 
         botonFuego.addEventListener("click", ataqueFuego)
         botonAgua.addEventListener("click", ataqueAgua)
         botonTierra.addEventListener("click", ataqueTierra)
-    
+        
 }
 
 function seleccionarMascotaEnemigo() {
