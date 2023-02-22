@@ -22,7 +22,10 @@ let ataqueJugador = []
 let mokepones = []
 let inputHipodoge 
 let inputCapipepo 
-let inputRatigueya 
+let inputRatigueya
+let inputMalufis
+let inputAlien
+let inputLaura 
 let opcionDeMokepones
 let ataquesMokepon
 let ataquesMokeponEnemigo
@@ -34,6 +37,7 @@ let indexAtaqueJugador
 let indexAtaqueEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
+let imagenLucha = document.getElementById("imagenLucha")
 
 
 class Mokepon {
@@ -44,9 +48,12 @@ class Mokepon {
         this.ataques = []
     }
 }
-let hipodoge = new Mokepon("Hipodoge", "./assets/mokepons_mokepon_hipodoge_attack.png", 5)
+let hipodoge = new Mokepon("Hipodoge", "./assets/hipodoge.png", 5)
 let capipepo = new Mokepon("Capipepo", "./assets/mokepons_mokepon_capipepo_attack.png", 5)
-let ratigueya = new Mokepon("Ratigueya", "./assets/mokepons_mokepon_ratigueya_attack.png", 5)
+let ratigueya = new Mokepon("Ratigueya", "./assets/ratigueya.png", 5)
+let malufis = new Mokepon("Malufis", "./assets/4FD.jpeg", 5)
+let alien = new Mokepon("Alien", "./assets/264.jpeg", 5)
+let laura = new Mokepon("Laura", "./assets/F1A.jpeg", 5)
 hipodoge.ataques.push(
     {nombre: "💧", id: "boton-agua"},
     {nombre: "💧", id: "boton-agua"},
@@ -68,7 +75,29 @@ ratigueya.ataques.push(
     {nombre: "💧", id: "boton-agua"},
     {nombre: "🎋", id: "boton-tierra"},
 )
-mokepones.push(hipodoge,capipepo,ratigueya)
+malufis.ataques.push(
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "🎋", id: "boton-tierra"},
+)
+alien.ataques.push(
+    {nombre: "🎋", id: "boton-tierra"},
+    {nombre: "🎋", id: "boton-tierra"},
+    {nombre: "🎋", id: "boton-tierra"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "🔥", id: "boton-fuego"},   
+)
+laura.ataques.push(
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🎋", id: "boton-tierra"},
+)
+
+mokepones.push(hipodoge,capipepo,ratigueya,malufis,alien,laura)
 
 
 function iniciarJuego() {
@@ -87,6 +116,9 @@ function iniciarJuego() {
         inputHipodoge = document.getElementById("Hipodoge")
         inputCapipepo = document.getElementById("Capipepo")
         inputRatigueya = document.getElementById("Ratigueya")
+        inputMalufis = document.getElementById("Malufis")
+        inputAlien = document.getElementById("Alien")
+        inputLaura = document.getElementById("Laura")
     })
     
     sectionReiniciar.style.display = "none"
@@ -110,11 +142,28 @@ function seleccionarMascotaJugador() {
         spanMascotaJugador.innerHTML = inputRatigueya.id
         mascotaJugador = inputRatigueya.id
     }
+    else if(inputMalufis.checked) {
+        spanMascotaJugador.innerHTML = inputMalufis.id
+        mascotaJugador = inputMalufis.id
+    }
+    else if(inputAlien.checked) {
+        spanMascotaJugador.innerHTML = inputAlien.id
+        mascotaJugador = inputAlien.id
+    }
+    else if(inputLaura.checked) {
+        spanMascotaJugador.innerHTML = inputLaura.id
+        mascotaJugador = inputLaura.id
+    }
     else {
         alert("SELECCIONA UNA MASCOTA!!!!!!!")
     }
     extraerAtaques(mascotaJugador)
     seleccionarMascotaEnemigo()
+    imagenlucha()
+}
+function imagenlucha(){
+
+    imagenLucha.innerHTML = opcionDeMokepones 
 }
 function extraerAtaques(mascotaJugador) {
     let ataques

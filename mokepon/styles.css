@@ -90,7 +90,7 @@ input:checked + label{
 }
 .ataques{
     display: grid;
-    grid-template-columns: 100px 100px;
+    grid-template-columns: 150px 150px;
     color: white;
 }
 #vidas-jugador, #vidas-enemigo{
@@ -101,6 +101,11 @@ input:checked + label{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.figuraJugador img, .figuraEnemigo img{
+    width: 115px;
+    height: 180px;
+   
 }
 
 @media (max-width: 360px) {
