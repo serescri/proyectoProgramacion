@@ -42,7 +42,7 @@ let indexAtaqueEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
 let lienzo = mapa.getContext("2d")
-
+let intervalo
 
 class Mokepon {
     constructor(nombre, foto, vida) {
@@ -50,6 +50,14 @@ class Mokepon {
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 10
+        this.ancho = 70
+        this.alto = 100
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 }
 let hipodoge = new Mokepon("Hipodoge", "./assets/hipodoge.png", 5)
@@ -137,15 +145,10 @@ function seleccionarMascotaJugador() {
     sectionSelecionarMascota.style.display = "none"
     //sectionSelecionarAtaque.style.display = "flex"
     sectionVerMapa.style.display = "flex"
-    let imagenDeLaura = new Image()
-    imagenDeLaura.src = laura.foto
-    lienzo.drawImage(
-        imagenDeLaura,
-        20,
-        10,
-        100,
-        130
-    )
+    //let imagenDeLaura = new Image()
+    //imagenDeLaura.src = laura.foto
+    
+    iniciarMapa()
     
     if(inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
@@ -322,4 +325,62 @@ function crearMensajeFinal(resultadoFinal) {
  }
 function aleatorio(min, max){ return Math.floor(Math.random() * (max - min + 1) + min)
 }
+function pintarPersonaje(){
+    laura.x = laura.x + laura.velocidadX
+    laura.y = laura.y + laura.velocidadY
+    lienzo.clearRect(0, 0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        //imagenDeLaura,
+        laura.mapaFoto,
+        //20,
+        laura.x,
+        //10,
+        laura.y,
+        //100,
+        laura.ancho,
+        //130
+        laura.alto
+    )
+}
+
+function moverDerecha() {
+    laura.velocidadX = 5
+}
+function moverIzquierda() {
+    laura.velocidadX = -5
+}
+function moverArriba() {
+    laura.velocidadY = -5
+}
+function moverAbajo() {
+    laura.velocidadY = 5
+}
+function detenerMovimiento() {
+    laura.velocidadX = 0
+    laura.velocidadY = 0
+}
+function sePresionoUnaTecla(event) {
+    switch (event.key) {
+        case "ArrowUp":
+            moverArriba()
+            break
+        case "ArrowDown":
+            moverAbajo()
+            break
+        case "ArrowLeft":
+            moverIzquierda()
+            break
+        case "ArrowRight":
+            moverDerecha()
+            break
+        default:
+            break
+    }
+}
+function iniciarMapa() {
+    intervalo = setInterval(pintarPersonaje, 50)
+    window.addEventListener("keydown", sePresionoUnaTecla)
+    window.addEventListener("keyup", detenerMovimiento)
+}
+
 window.addEventListener("load", iniciarJuego)
