@@ -1,7 +1,8 @@
 const sectionSelecionarAtaque = document.getElementById("seleccionar-ataque")
 const sectionReiniciar = document.getElementById("reiniciar")
 const botonMascotaJugador = document.getElementById("boton-mascota")
-
+let imgSrcJugador = document.getElementById("img-miniatura-jugador")
+let imgSrcEnemigo = document.getElementById("img-miniatura-enemigo")
 const botonreiniciar = document.getElementById("boton-reiniciar")
 const contenedorAtaques = document.getElementById("contenedorAtaques")
 const sectionSelecionarMascota = document.getElementById("seleccionar-mascota")
@@ -37,7 +38,7 @@ let indexAtaqueJugador
 let indexAtaqueEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
-let imagenLucha = document.getElementById("imagenLucha")
+//let imagenLucha = document.getElementById("imagenLucha")
 
 
 class Mokepon {
@@ -133,38 +134,41 @@ function seleccionarMascotaJugador() {
     if(inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
         mascotaJugador = inputHipodoge.id
+        imgSrcJugador.src = hipodoge.foto
     } 
     else if(inputCapipepo.checked) {
         spanMascotaJugador.innerHTML = inputCapipepo.id
         mascotaJugador = inputCapipepo.id
+        imgSrcJugador.src = capipepo.foto
     }
     else if(inputRatigueya.checked) {
         spanMascotaJugador.innerHTML = inputRatigueya.id
         mascotaJugador = inputRatigueya.id
+        imgSrcJugador.src = ratigueya.foto
     }
     else if(inputMalufis.checked) {
         spanMascotaJugador.innerHTML = inputMalufis.id
         mascotaJugador = inputMalufis.id
+        imgSrcJugador.src = malufis.foto
     }
     else if(inputAlien.checked) {
         spanMascotaJugador.innerHTML = inputAlien.id
         mascotaJugador = inputAlien.id
+        imgSrcJugador.src = alien.foto
     }
     else if(inputLaura.checked) {
         spanMascotaJugador.innerHTML = inputLaura.id
         mascotaJugador = inputLaura.id
+        imgSrcJugador.src = laura.foto
     }
     else {
         alert("SELECCIONA UNA MASCOTA!!!!!!!")
     }
     extraerAtaques(mascotaJugador)
     seleccionarMascotaEnemigo()
-    imagenlucha()
-}
-function imagenlucha(){
 
-    imagenLucha.innerHTML = opcionDeMokepones 
 }
+
 function extraerAtaques(mascotaJugador) {
     let ataques
     for (let i = 0; i < mokepones.length; i++) {
@@ -214,6 +218,7 @@ function seleccionarMascotaEnemigo() {
     let mascotaAleatoria = aleatorio(0, mokepones.length -1)
     spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre
     ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques
+    imgSrcEnemigo.src = mokepones[mascotaAleatoria].foto
     secuenciaAtaque()
 }
 function aleatorioEnemigo() {
