@@ -15,6 +15,9 @@ const sectionMensajes = document.getElementById("resultado")
 const AtaquesDelJugador = document.getElementById("ataques-del-jugador")
 const AtaquesDelEnemigo = document.getElementById("ataques-del-enemigo")
 
+const sectionVerMapa = document.getElementById("ver-mapa")
+const mapa = document.getElementById("mapa")
+
 let botonFuego 
 let botonAgua 
 let botonTierra 
@@ -38,7 +41,7 @@ let indexAtaqueJugador
 let indexAtaqueEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
-//let imagenLucha = document.getElementById("imagenLucha")
+let lienzo = mapa.getContext("2d")
 
 
 class Mokepon {
@@ -104,6 +107,7 @@ mokepones.push(hipodoge,capipepo,ratigueya,malufis,alien,laura)
 function iniciarJuego() {
     sectionSelecionarAtaque.style.display = "none"
 
+    sectionVerMapa.style.display = "none"
     mokepones.forEach((Mokepon) => {
 
         opcionDeMokepones = `
@@ -129,8 +133,20 @@ function iniciarJuego() {
     botonreiniciar.addEventListener("click", reiniciarJuego)
 }
 function seleccionarMascotaJugador() { 
+    
     sectionSelecionarMascota.style.display = "none"
-    sectionSelecionarAtaque.style.display = "flex"
+    //sectionSelecionarAtaque.style.display = "flex"
+    sectionVerMapa.style.display = "flex"
+    let imagenDeLaura = new Image()
+    imagenDeLaura.src = laura.foto
+    lienzo.drawImage(
+        imagenDeLaura,
+        20,
+        10,
+        100,
+        130
+    )
+    
     if(inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
         mascotaJugador = inputHipodoge.id
