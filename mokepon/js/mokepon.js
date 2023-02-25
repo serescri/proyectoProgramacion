@@ -34,6 +34,7 @@ let opcionDeMokepones
 let ataquesMokepon
 let ataquesMokeponEnemigo
 let mascotaJugador
+let mascotaJugadorObjeto
 let ataqueEnemigo = []
 let vidasEnemigo = 3
 let vidasJugador = 3
@@ -43,29 +44,47 @@ let victoriasJugador = 0
 let victoriasEnemigo = 0
 let lienzo = mapa.getContext("2d")
 let intervalo
+let mapaBackground = new Image()
+mapaBackground.src = "./assets/mokemap.png"
 
 class Mokepon {
-    constructor(nombre, foto, vida) {
+    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = 20
-        this.y = 10
-        this.ancho = 70
-        this.alto = 100
+        this.x = x
+        this.y = y
+        this.ancho = 40
+        this.alto = 70
         this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
+        this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
         this.velocidadY = 0
     }
+    pintarMokepon() {
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+        )
+    }
 }
-let hipodoge = new Mokepon("Hipodoge", "./assets/hipodoge.png", 5)
-let capipepo = new Mokepon("Capipepo", "./assets/mokepons_mokepon_capipepo_attack.png", 5)
-let ratigueya = new Mokepon("Ratigueya", "./assets/ratigueya.png", 5)
-let malufis = new Mokepon("Malufis", "./assets/4FD.jpeg", 5)
-let alien = new Mokepon("Alien", "./assets/264.jpeg", 5)
-let laura = new Mokepon("Laura", "./assets/F1A.jpeg", 5)
+let hipodoge = new Mokepon("Hipodoge", "./assets/hipodoge.png", 5, "./assets/hipodoge1.png")
+let capipepo = new Mokepon("Capipepo", "./assets/mokepons_mokepon_capipepo_attack.png", 5, "./assets/capipepo.png")
+let ratigueya = new Mokepon("Ratigueya", "./assets/ratigueya.png", 5, "./assets/ratigueya1.png")
+let malufis = new Mokepon("Malufis", "./assets/4FD.jpeg", 5, "./assets/4FD.png")
+let alien = new Mokepon("Alien", "./assets/264.jpeg", 5, "./assets/264.png")
+let laura = new Mokepon("Laura", "./assets/F1A.jpeg", 5, "./assets/F1A.png")
+let hipodogeEnemigo = new Mokepon("Hipodoge", "./assets/hipodoge.png", 5, "./assets/hipodoge1.png")
+let capipepoEnemigo = new Mokepon("Capipepo", "./assets/mokepons_mokepon_capipepo_attack.png", 5, "./assets/capipepo.png")
+let ratigueyaEnemigo = new Mokepon("Ratigueya", "./assets/ratigueya.png", 5, "./assets/ratigueya1.png")
+let malufisEnemigo = new Mokepon("Malufis", "./assets/4FD.jpeg", 5, "./assets/4FD.png", 20, 30)
+let alienEnemigo = new Mokepon("Alien", "./assets/264.jpeg", 5, "./assets/264.png", 30, 50 )
+let lauraEnemigo = new Mokepon("Laura", "./assets/F1A.jpeg", 5, "./assets/F1A.png", 50, 90)
+
 hipodoge.ataques.push(
     {nombre: "💧", id: "boton-agua"},
     {nombre: "💧", id: "boton-agua"},
@@ -148,7 +167,6 @@ function seleccionarMascotaJugador() {
     //let imagenDeLaura = new Image()
     //imagenDeLaura.src = laura.foto
     
-    iniciarMapa()
     
     if(inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
@@ -184,8 +202,9 @@ function seleccionarMascotaJugador() {
         alert("SELECCIONA UNA MASCOTA!!!!!!!")
     }
     extraerAtaques(mascotaJugador)
+    iniciarMapa()
     seleccionarMascotaEnemigo()
-
+    mascotaJugadorObjeto = ObtenerObjetoMascota(mascotaJugador)
 }
 
 function extraerAtaques(mascotaJugador) {
@@ -325,39 +344,38 @@ function crearMensajeFinal(resultadoFinal) {
  }
 function aleatorio(min, max){ return Math.floor(Math.random() * (max - min + 1) + min)
 }
-function pintarPersonaje(){
-    laura.x = laura.x + laura.velocidadX
-    laura.y = laura.y + laura.velocidadY
+function pintarCanvas(){
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
-        //imagenDeLaura,
-        laura.mapaFoto,
-        //20,
-        laura.x,
-        //10,
-        laura.y,
-        //100,
-        laura.ancho,
-        //130
-        laura.alto
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height
     )
+    mascotaJugadorObjeto.pintarMokepon()
+    lauraEnemigo.pintarMokepon()
+    alienEnemigo.pintarMokepon()
+    malufisEnemigo.pintarMokepon()
 }
 
 function moverDerecha() {
-    laura.velocidadX = 5
+    mascotaJugadorObjeto.velocidadX = 5
 }
 function moverIzquierda() {
-    laura.velocidadX = -5
+    mascotaJugadorObjeto.velocidadX = -5
 }
 function moverArriba() {
-    laura.velocidadY = -5
+    mascotaJugadorObjeto.velocidadY = -5
 }
 function moverAbajo() {
-    laura.velocidadY = 5
+    mascotaJugadorObjeto.velocidadY = 5
 }
 function detenerMovimiento() {
-    laura.velocidadX = 0
-    laura.velocidadY = 0
+    mascotaJugadorObjeto.velocidadX = 0
+    mascotaJugadorObjeto.velocidadY = 0
 }
 function sePresionoUnaTecla(event) {
     switch (event.key) {
@@ -378,9 +396,19 @@ function sePresionoUnaTecla(event) {
     }
 }
 function iniciarMapa() {
-    intervalo = setInterval(pintarPersonaje, 50)
+    mapa.width = 320;
+    mapa.height = 240;
+    intervalo = setInterval(pintarCanvas, 50)
     window.addEventListener("keydown", sePresionoUnaTecla)
     window.addEventListener("keyup", detenerMovimiento)
+}
+function ObtenerObjetoMascota() {
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador === mokepones[i].nombre) {
+            return mokepones[i]
+        }  
+    }
+
 }
 
 window.addEventListener("load", iniciarJuego)
