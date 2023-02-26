@@ -1,8 +1,11 @@
 // Importamos Express desde la carpeta node_modules
 const express = require('express');
+const cors = require("cors");
 
 // Creamos la aplicación de Express
 const app = express();
+app.use(cors())
+app.use(express.json())
 
 // Escojemos un puerto por el que el servidor web escuchará
 const port = 3000;
