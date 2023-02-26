@@ -9,7 +9,7 @@ const port = 3000;
 
 // Página para visualizar el mensaje "¡Hola Express!"
 app.get('/', (req, res) => {
-  res.send('¡Hola Express!');
+  res.send("./assets/F1A.jpeg");
 });
 
 // Activamos el servidor en el puerto 3000
