@@ -81,9 +81,9 @@ let laura = new Mokepon("Laura", "./assets/F1A.jpeg", 5, "./assets/F1A.png")
 let hipodogeEnemigo = new Mokepon("Hipodoge", "./assets/hipodoge.png", 5, "./assets/hipodoge1.png")
 let capipepoEnemigo = new Mokepon("Capipepo", "./assets/mokepons_mokepon_capipepo_attack.png", 5, "./assets/capipepo.png")
 let ratigueyaEnemigo = new Mokepon("Ratigueya", "./assets/ratigueya.png", 5, "./assets/ratigueya1.png")
-let malufisEnemigo = new Mokepon("Malufis", "./assets/4FD.jpeg", 5, "./assets/4FD.png", 20, 30)
-let alienEnemigo = new Mokepon("Alien", "./assets/264.jpeg", 5, "./assets/264.png", 30, 50 )
-let lauraEnemigo = new Mokepon("Laura", "./assets/F1A.jpeg", 5, "./assets/F1A.png", 50, 90)
+let malufisEnemigo = new Mokepon("Malufis", "./assets/4FD.jpeg", 5, "./assets/4FD.png", 60, 80)
+let alienEnemigo = new Mokepon("Alien", "./assets/264.jpeg", 5, "./assets/264.png", 280, 50 )
+let lauraEnemigo = new Mokepon("Laura", "./assets/F1A.jpeg", 5, "./assets/F1A.png", 100, 150)
 
 hipodoge.ataques.push(
     {nombre: "💧", id: "boton-agua"},
@@ -127,6 +127,27 @@ laura.ataques.push(
     {nombre: "🔥", id: "boton-fuego"},
     {nombre: "🎋", id: "boton-tierra"},
 )
+malufisEnemigo.ataques.push(
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "🎋", id: "boton-tierra"},
+)
+alienEnemigo.ataques.push(
+    {nombre: "🎋", id: "boton-tierra"},
+    {nombre: "🎋", id: "boton-tierra"},
+    {nombre: "🎋", id: "boton-tierra"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "🔥", id: "boton-fuego"},   
+)
+lauraEnemigo.ataques.push(
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🎋", id: "boton-tierra"},
+)
 
 mokepones.push(hipodoge,capipepo,ratigueya,malufis,alien,laura)
 
@@ -162,7 +183,7 @@ function iniciarJuego() {
 function seleccionarMascotaJugador() { 
     
     sectionSelecionarMascota.style.display = "none"
-    //sectionSelecionarAtaque.style.display = "flex"
+    
     sectionVerMapa.style.display = "flex"
     //let imagenDeLaura = new Image()
     //imagenDeLaura.src = laura.foto
@@ -203,7 +224,7 @@ function seleccionarMascotaJugador() {
     }
     extraerAtaques(mascotaJugador)
     iniciarMapa()
-    seleccionarMascotaEnemigo()
+    
     mascotaJugadorObjeto = ObtenerObjetoMascota(mascotaJugador)
 }
 
@@ -252,13 +273,19 @@ function secuenciaAtaque () {
         })
      })      
 }
-function seleccionarMascotaEnemigo() {
-    let mascotaAleatoria = aleatorio(0, mokepones.length -1)
-    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre
-    ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques
-    imgSrcEnemigo.src = mokepones[mascotaAleatoria].foto
+function seleccionarMascotaEnemigo(enemigo) {
+    spanMascotaEnemigo.innerHTML = enemigo.nombre
+    ataquesMokeponEnemigo = enemigo.ataques
+    imgSrcEnemigo.src = enemigo.foto
     secuenciaAtaque()
 }
+//function seleccionarMascotaEnemigo() {
+  //  let mascotaAleatoria = aleatorio(0, mokepones.length -1)
+  //  spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre
+   // ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques
+    //imgSrcEnemigo.src = mokepones[mascotaAleatoria].foto
+   // secuenciaAtaque()
+//}
 function aleatorioEnemigo() {
     let ataqueRamdom = aleatorio(0,ataquesMokeponEnemigo.length -1)
     if (ataqueRamdom == 0 || ataqueRamdom == 1) {
@@ -359,6 +386,11 @@ function pintarCanvas(){
     lauraEnemigo.pintarMokepon()
     alienEnemigo.pintarMokepon()
     malufisEnemigo.pintarMokepon()
+    if(mascotaJugadorObjeto.velocidadX !== 0 || mascotaJugadorObjeto.velocidadY !== 0) {
+        revisarColision(lauraEnemigo)
+        revisarColision(alienEnemigo)
+        revisarColision(malufisEnemigo)
+    }
 }
 
 function moverDerecha() {
@@ -408,6 +440,33 @@ function ObtenerObjetoMascota() {
             return mokepones[i]
         }  
     }
+
+}
+function revisarColision(enemigo) {
+    const arribaEnemigo = enemigo.y
+    const abajoEnemigo = enemigo.y + enemigo.alto
+    const derechaEnemigo = enemigo.x + enemigo.ancho
+    const izquierdaEnemigo = enemigo.x
+
+    const arribaMascota = mascotaJugadorObjeto.y
+    const abajoMascota = mascotaJugadorObjeto.y + mascotaJugadorObjeto.alto
+    const derechaMascota = mascotaJugadorObjeto.x + mascotaJugadorObjeto.ancho
+    const izquierdaMascota = mascotaJugadorObjeto.x
+
+    if( 
+        abajoMascota < arribaEnemigo ||
+        arribaMascota > abajoEnemigo ||
+        derechaMascota < izquierdaEnemigo ||
+        izquierdaMascota > derechaEnemigo
+    ) {
+        return
+    }
+    detenerMovimiento()
+    sectionSelecionarAtaque.style.display = "flex"
+    sectionVerMapa.style.display = "none"
+    seleccionarMascotaEnemigo(enemigo)
+   // alert("Hay colision con  " + enemigo.nombre)
+
 
 }
 
