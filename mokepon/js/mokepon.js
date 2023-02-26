@@ -185,9 +185,6 @@ function seleccionarMascotaJugador() {
     sectionSelecionarMascota.style.display = "none"
     
     sectionVerMapa.style.display = "flex"
-    //let imagenDeLaura = new Image()
-    //imagenDeLaura.src = laura.foto
-    
     
     if(inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
@@ -221,6 +218,9 @@ function seleccionarMascotaJugador() {
     }
     else {
         alert("SELECCIONA UNA MASCOTA!!!!!!!")
+      
+        reiniciarJuego()
+       
     }
     extraerAtaques(mascotaJugador)
     iniciarMapa()
@@ -462,6 +462,7 @@ function revisarColision(enemigo) {
         return
     }
     detenerMovimiento()
+    clearInterval(intervalo)
     sectionSelecionarAtaque.style.display = "flex"
     sectionVerMapa.style.display = "none"
     seleccionarMascotaEnemigo(enemigo)
