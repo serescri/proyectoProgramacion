@@ -82,7 +82,7 @@ let hipodogeEnemigo = new Mokepon("Hipodoge", "./assets/hipodoge.png", 5, "./ass
 let capipepoEnemigo = new Mokepon("Capipepo", "./assets/mokepons_mokepon_capipepo_attack.png", 5, "./assets/capipepo.png")
 let ratigueyaEnemigo = new Mokepon("Ratigueya", "./assets/ratigueya.png", 5, "./assets/ratigueya1.png")
 let malufisEnemigo = new Mokepon("Malufis", "./assets/4FD.jpeg", 5, "./assets/4FD.png", 60, 80)
-let alienEnemigo = new Mokepon("Alien", "./assets/264.jpeg", 5, "./assets/264.png", 280, 50 )
+let alienEnemigo = new Mokepon("Alien", "./assets/264.jpeg", 5, "./assets/264.png", 200, 50 )
 let lauraEnemigo = new Mokepon("Laura", "./assets/F1A.jpeg", 5, "./assets/F1A.png", 100, 150)
 
 hipodoge.ataques.push(
