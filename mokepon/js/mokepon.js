@@ -18,6 +18,7 @@ const AtaquesDelEnemigo = document.getElementById("ataques-del-enemigo")
 const sectionVerMapa = document.getElementById("ver-mapa")
 const mapa = document.getElementById("mapa")
 
+let jugadorId = null
 let botonFuego 
 let botonAgua 
 let botonTierra 
@@ -176,10 +177,28 @@ function iniciarJuego() {
     
     sectionReiniciar.style.display = "none"
     
-    botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador)
-    
+    botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador)    
+  
     botonreiniciar.addEventListener("click", reiniciarJuego)
+
+    unirseAlJuego()
+
 }
+
+function unirseAlJuego() {
+    fetch("http://localhost:3000/unirse")
+        .then(function(res) {
+            
+            if(res.ok) {
+                res.text()
+                    .then(function(respuesta) {
+                        console.log(respuesta)
+                        jugadorId = respuesta
+                    })
+            }
+    })
+}
+
 function seleccionarMascotaJugador() { 
     
     sectionSelecionarMascota.style.display = "none"
@@ -222,10 +241,24 @@ function seleccionarMascotaJugador() {
         reiniciarJuego()
        
     }
+
+    seleccionarMokepon(mascotaJugador)
     extraerAtaques(mascotaJugador)
     iniciarMapa()
     
     mascotaJugadorObjeto = ObtenerObjetoMascota(mascotaJugador)
+}
+
+function seleccionarMokepon(mascotaJugador) {
+    fetch(`http://localhost:3000/mokepon/${jugadorId}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            mokepon: mascotaJugador
+        })
+    })
 }
 
 function extraerAtaques(mascotaJugador) {
@@ -383,6 +416,8 @@ function pintarCanvas(){
         mapa.height
     )
     mascotaJugadorObjeto.pintarMokepon()
+
+    enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
     lauraEnemigo.pintarMokepon()
     alienEnemigo.pintarMokepon()
     malufisEnemigo.pintarMokepon()
@@ -391,6 +426,19 @@ function pintarCanvas(){
         revisarColision(alienEnemigo)
         revisarColision(malufisEnemigo)
     }
+}
+
+function enviarPosicion(x, y) {
+    fetch(`http://localhost:3000/mokepon/${jugadorId}/posicion`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            x,
+            y
+        })
+    })
 }
 
 function moverDerecha() {
